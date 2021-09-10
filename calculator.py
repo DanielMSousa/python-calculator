@@ -2,7 +2,7 @@ from tkinter import *
 
 class Calculadora:
     def __init__(self):
-        self.ponto = True
+        self.dot = True
         self.error = False
         self.root = Tk()
         self.config_window()
@@ -29,9 +29,9 @@ class Calculadora:
         self.result_frame = Frame(self.screen_frame, bg='#2c2c2c')
         self.result_frame.place(relx=0, rely=0.5, relwidth=1, relheight=0.5)
 
-        self.resultLabel = Label(self.result_frame, textvariable=self.eqvar,
+        self.result_label = Label(self.result_frame, textvariable=self.eqvar,
             bg='#2c2c2c', fg='#ffffff', font=(None, 18), anchor="e")
-        self.resultLabel.pack(side = RIGHT, padx=20, pady=(20, 10))
+        self.result_label.pack(side = RIGHT, padx=20, pady=(20, 10))
 
 
         #Lastequation
@@ -41,15 +41,15 @@ class Calculadora:
         self.lasteq_frame = Frame(self.screen_frame, bg='#2c2c2c')
         self.lasteq_frame.place(relx=0, rely=0, relwidth=1, relheight=0.5)
 
-        self.lasteqLabel = Label(self.lasteq_frame, textvariable=self.lastvar,
+        self.lasteq_label = Label(self.lasteq_frame, textvariable=self.lastvar,
             bg='#2c2c2c', fg='#777777', font=(None, 18), anchor="e")
-        self.lasteqLabel.pack(side = RIGHT, padx=20, pady=(30, 0))
+        self.lasteq_label.pack(side = RIGHT, padx=20, pady=(30, 0))
 
 
     def create_buttons(self):
         # Row 1
-        self.ac = Button(self.button_frame, text='C', command=self.clean)
-        self.ac.place(relx=0, rely=0, relwidth=0.5, relheight=0.2)
+        self.bac = Button(self.button_frame, text='C', command=self.clean)
+        self.bac.place(relx=0, rely=0, relwidth=0.5, relheight=0.2)
 
         self.berase = Button(self.button_frame, text='⌫', command=self.erase)
         self.berase.place(relx=0.5, rely=0, relwidth=0.25, relheight=0.2)
@@ -118,27 +118,27 @@ class Calculadora:
 
     def operator(self, symbol):
         if(not self.error):
-            self.ponto = True
+            self.dot = True
             self.put_symbol(symbol)
 
     def put_dot(self):
         if(not self.error):
-            if(self.ponto):
+            if(self.dot):
                 self.put_symbol('.')
-                self.ponto = False
+                self.dot = False
 
     def erase(self):
         if(len(self.equation) > 0):
             if(not self.error):
                 if self.equation[-1] == '.':
-                    self.ponto = True
+                    self.dot = True
                 self.equation = self.equation[:-1]
                 self.update_screen()
 
     def clean(self):
         self.equation = ''
         self.error = False
-        self.ponto = True
+        self.dot = True
         self.lastvar.set('')
         self.update_screen()
     
@@ -174,7 +174,7 @@ class Calculadora:
                     self.lastvar.set(eq)
                 
             if ('.' in self.equation):
-                self.ponto = False
+                self.dot = False
 
             self.update_screen()
 
