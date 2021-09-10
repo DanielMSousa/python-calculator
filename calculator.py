@@ -128,11 +128,12 @@ class Calculadora:
                 self.ponto = False
 
     def erase(self):
-        if(not self.error):
-            if self.equation[-1] == '.':
-                self.ponto = True
-            self.equation = self.equation[:-1]
-            self.update_screen()
+        if(len(self.equation) > 0):
+            if(not self.error):
+                if self.equation[-1] == '.':
+                    self.ponto = True
+                self.equation = self.equation[:-1]
+                self.update_screen()
 
     def clean(self):
         self.equation = ''
@@ -171,6 +172,10 @@ class Calculadora:
 
                 finally:
                     self.lastvar.set(eq)
+                
+            if ('.' in self.equation):
+                self.ponto = False
+
             self.update_screen()
 
 Calculadora()
